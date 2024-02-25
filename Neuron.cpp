@@ -64,7 +64,7 @@ void printElapsedTime(auto& start, std::string_view functionName) {
     std::cout << "call to " << functionName << " took " << elapsedTime.count() << ((elapsedTime.count() == 1) ? " microsecond" : " microseconds") << '\n';
 }
 
-double manualNeuron(Vector<double, 4> inputs, Vector<double, 4> weights, double bias) {
+double manualNeuron(const Vector<double, 4>& inputs, const Vector<double, 4>& weights, double bias) {
     // manually compute output of neuron with 4 inputs
     auto start = getStartTime();
 
@@ -79,7 +79,7 @@ double manualNeuron(Vector<double, 4> inputs, Vector<double, 4> weights, double 
     return output;
 }
 
-Vector<double, 3> manualLayer(Vector<double, 4> inputs, Vector<double, 4> weights1, Vector<double, 4> weights2, Vector<double, 4> weights3, double bias1, double bias2, double bias3) {
+Vector<double, 3> manualLayer(const Vector<double, 4>& inputs, const Vector<double, 4>& weights1, const Vector<double, 4>& weights2, const Vector<double, 4>& weights3, double bias1, double bias2, double bias3) {
     // manually compute output of layer with 4 inputs and 3 neurons
     auto start = getStartTime();
 
@@ -105,7 +105,7 @@ Vector<double, 3> manualLayer(Vector<double, 4> inputs, Vector<double, 4> weight
     return outputs;
 }
 
-Vector<double, 3> forLoopLayer(Vector<double, 4> inputs, Matrix<double, 3, 4> weights, Vector<double, 3> biases){
+Vector<double, 3> forLoopLayer(const Vector<double, 4>& inputs, const Matrix<double, 3, 4>& weights, const Vector<double, 3>& biases){
     // compute output of layer with 4 inputs and 3 neurons using a for loop
     auto start = getStartTime();
 
@@ -122,7 +122,7 @@ Vector<double, 3> forLoopLayer(Vector<double, 4> inputs, Matrix<double, 3, 4> we
     return outputs;
 }
 
-double dotProductNeuron(Vector<double, 4> inputs, Vector<double, 4> weights, double bias){
+double dotProductNeuron(const Vector<double, 4>& inputs, const Vector<double, 4>& weights, double bias){
     // compute output of neuron with 4 inputs using dot product
     auto start = getStartTime();
 
@@ -133,7 +133,7 @@ double dotProductNeuron(Vector<double, 4> inputs, Vector<double, 4> weights, dou
     return output;
 }
 
-Vector<double, 3> dotProductLayer(Vector<double, 4> inputs, Matrix<double, 3, 4> weights, Vector<double, 3> biases) {
+Vector<double, 3> dotProductLayer(const Vector<double, 4>& inputs, const Matrix<double, 3, 4>& weights, const Vector<double, 3>& biases) {
     // compute output of layer with 4 inputs and 3 neurons using matrix multiplication/dot product
     auto start = getStartTime();
 
@@ -144,7 +144,7 @@ Vector<double, 3> dotProductLayer(Vector<double, 4> inputs, Matrix<double, 3, 4>
     return outputs;
 }
 
-Matrix<double, 3, 3> matrixMultiplicationLayer(Matrix<double, 3, 4> inputs, Matrix<double, 3, 4> weights, Vector<double, 3> biases) {
+Matrix<double, 3, 3> matrixMultiplicationLayer(const Matrix<double, 3, 4>& inputs, const Matrix<double, 3, 4>& weights, const Vector<double, 3>& biases) {
     // compute output of layer with batch of data with samples with 4 inputs and layer with 3 neurons using matrix multiplication
     auto start = getStartTime();
 
@@ -159,7 +159,7 @@ Matrix<double, 3, 3> matrixMultiplicationLayer(Matrix<double, 3, 4> inputs, Matr
 int main()
 {   /*
     todo
-    - pass and return appropriately via reference, time the difference
+    - time the difference between pass by reference and pass by value
     - formatting (configure .editorconfig, add to gitignore)
     ---
     - write header
