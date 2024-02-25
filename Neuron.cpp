@@ -61,7 +61,7 @@ auto getStartTime() {
 void printElapsedTime(auto& start, std::string_view functionName) {
     auto finish = high_resolution_clock::now();
     auto elapsedTime = duration_cast<microseconds>(finish - start);
-    std::cout << "call to " << functionName << " took " << elapsedTime.count() << " microseconds" << '\n';
+    std::cout << "call to " << functionName << " took " << elapsedTime.count() << ((elapsedTime.count() == 1) ? " microsecond" : " microseconds") << '\n';
 }
 
 double manualNeuron(Vector<double, 4> inputs, Vector<double, 4> weights, double bias) {
