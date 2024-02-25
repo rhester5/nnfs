@@ -66,23 +66,17 @@ void printElapsedTime(auto& start, std::string_view functionName) {
 
 double manualNeuron(const Vector<double, 4>& inputs, const Vector<double, 4>& weights, double bias) {
     // manually compute output of neuron with 4 inputs
-    auto start = getStartTime();
-
     double output = inputs(0) * weights(0) + 
                     inputs(1) * weights(1) + 
                     inputs(2) * weights(2) + 
                     inputs(3) * weights(3) + 
                     bias;
 
-    printElapsedTime(start, "manualNeuron");
-
     return output;
 }
 
 Vector<double, 3> manualLayer(const Vector<double, 4>& inputs, const Vector<double, 4>& weights1, const Vector<double, 4>& weights2, const Vector<double, 4>& weights3, double bias1, double bias2, double bias3) {
     // manually compute output of layer with 4 inputs and 3 neurons
-    auto start = getStartTime();
-
     Vector<double, 3> outputs;
     outputs(0) = inputs(0) * weights1(0) + 
                  inputs(1) * weights1(1) + 
@@ -100,15 +94,11 @@ Vector<double, 3> manualLayer(const Vector<double, 4>& inputs, const Vector<doub
                  inputs(3) * weights3(3) + 
                  bias3;
 
-    printElapsedTime(start, "manualLayer");
-
     return outputs;
 }
 
 Vector<double, 3> forLoopLayer(const Vector<double, 4>& inputs, const Matrix<double, 3, 4>& weights, const Vector<double, 3>& biases){
     // compute output of layer with 4 inputs and 3 neurons using a for loop
-    auto start = getStartTime();
-
     Vector<double, 3> outputs;
     for (int i = 0; i < biases.size(); i++) {
         for (int j=0; j < inputs.size(); j++) {
@@ -117,43 +107,23 @@ Vector<double, 3> forLoopLayer(const Vector<double, 4>& inputs, const Matrix<dou
         outputs(i) += biases(i);
     }
 
-    printElapsedTime(start, "forLoopLayer");
-
     return outputs;
 }
 
 double dotProductNeuron(const Vector<double, 4>& inputs, const Vector<double, 4>& weights, double bias){
     // compute output of neuron with 4 inputs using dot product
-    auto start = getStartTime();
-
-    double output = inputs.dot(weights) + bias;
-
-    printElapsedTime(start, "dotProductNeuron");
-
-    return output;
+    return inputs.dot(weights) + bias;
 }
 
 Vector<double, 3> dotProductLayer(const Vector<double, 4>& inputs, const Matrix<double, 3, 4>& weights, const Vector<double, 3>& biases) {
     // compute output of layer with 4 inputs and 3 neurons using matrix multiplication/dot product
-    auto start = getStartTime();
-
-    Vector<double, 3> outputs = weights * inputs + biases;
-
-    printElapsedTime(start, "dotProductLayer");
-
-    return outputs;
+    return weights * inputs + biases;
 }
 
 Matrix<double, 3, 3> matrixMultiplicationLayer(const Matrix<double, 3, 4>& inputs, const Matrix<double, 3, 4>& weights, const Vector<double, 3>& biases) {
     // compute output of layer with batch of data with samples with 4 inputs and layer with 3 neurons using matrix multiplication
-    auto start = getStartTime();
-
     Matrix<double, 3, 3> outputs{inputs * weights.transpose()};
-    outputs = outputs.rowwise() + biases.transpose();
-
-    printElapsedTime(start, "matrixMultiplicationLayer");    
-
-    return outputs;       
+    return outputs.rowwise() + biases.transpose();    
 }
  
 int main()
