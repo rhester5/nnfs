@@ -10,7 +10,7 @@ using std::chrono::duration_cast;
 using std::chrono::duration;
 using std::chrono::microseconds;
 
-void test_eigen_vector() {
+void testEigenVector() {
     // different ways to initialize a vector
     MatrixXd m(3,1);
     m(0,0) = 1;
@@ -34,7 +34,7 @@ void test_eigen_vector() {
     std::cout << V << '\n';
 }
 
-void test_eigen_matrix() {
+void testEigenMatrix() {
     // different ways to initialize a matrix
     MatrixXd m(2, 3);
     m(0,0) = 1;
@@ -64,7 +64,7 @@ void printElapsedTime(auto& start, std::string_view functionName) {
     std::cout << "call to " << functionName << " took " << elapsedTime.count() << " microseconds" << '\n';
 }
 
-void manual_neuron() {
+void manualNeuron() {
     // manually compute output of neuron with 4 inputs
     auto start = getStartTime();
 
@@ -81,7 +81,7 @@ void manual_neuron() {
     printElapsedTime(start, "manualNeuron");
 }
 
-void manual_layer() {
+void manualLayer() {
     // manually compute output of layer with 4 inputs and 3 neurons
     auto start = getStartTime();
 
@@ -113,7 +113,7 @@ void manual_layer() {
     printElapsedTime(start, "manualLayer");
 }
 
-void for_loop_layer(){
+void forLoopLayer(){
     // compute output of layer with 4 inputs and 3 neurons using a for loop
     auto start = getStartTime();
 
@@ -135,7 +135,7 @@ void for_loop_layer(){
     printElapsedTime(start, "forLoopLayer");
 }
 
-void dot_product_neuron(){
+void dotProductNeuron(){
     // compute output of neuron with 4 inputs using dot product
     auto start = getStartTime();
 
@@ -148,7 +148,7 @@ void dot_product_neuron(){
     printElapsedTime(start, "dotProductNeuron");
 }
 
-void dot_product_layer() {
+void dotProductLayer() {
     // compute output of layer with 4 inputs and 3 neurons using matrix multiplication/dot product
     auto start = getStartTime();
 
@@ -164,7 +164,7 @@ void dot_product_layer() {
     printElapsedTime(start, "dotProductLayer");
 }
 
-void matrix_multiplication_layer() {
+void matrixMultiplicationLayer() {
     // compute output of layer with batch of data with samples with 4 inputs and layer with 3 neurons using matrix multiplication
     auto start = getStartTime();
     
@@ -193,16 +193,16 @@ int main()
     - templatify functions
     - more tests
     */
-    test_eigen_vector();
-    test_eigen_matrix();
+    testEigenVector();
+    testEigenMatrix();
     // these functions could've been done equivalently with std::vector
-    manual_neuron();
-    manual_layer();
-    for_loop_layer();
+    manualNeuron();
+    manualLayer();
+    forLoopLayer();
     // these functions actually required Eigen
-    dot_product_neuron();
-    dot_product_layer();
-    matrix_multiplication_layer();
+    dotProductNeuron();
+    dotProductLayer();
+    matrixMultiplicationLayer();
 
     return 0;
 }
