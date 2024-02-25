@@ -135,9 +135,7 @@ Matrix<double, 3, 3> matrixMultiplicationLayerByValue(Matrix<double, 3, 4> input
 int main()
 {   /*
     todo
-    - time the difference between pass by reference and pass by value
     - formatting (configure .editorconfig, add to gitignore)
-    ---
     - write header
     - add gtest
     ---
@@ -204,7 +202,31 @@ int main()
     }
     printElapsedTime(startByVal, "Pass by value");
 
-    // pass by value faster - guess Matrix and Vector objects aren't too expensive to copy when they're this small
+    // barely any difference - guess Matrix and Vector objects aren't too expensive to copy when they're this small
+
+    // test difference in runtime between manualLayer, forLoopLayer, and dotProductLayer
+
+    auto startManual = getStartTime();
+    for (int i = 0; i < 10000; ++i) { 
+        manualLayer(inputs, weights1, weights2, weights3, bias1, bias2, bias3);
+    }
+    printElapsedTime(startManual, "manualLayer");
+
+    auto startForLoop = getStartTime();
+    for (int i = 0; i < 10000; ++i) { 
+        forLoopLayer(inputs, weights2D, biases);
+    }
+    printElapsedTime(startForLoop, "forLoopLayer");
+
+    auto startDotProduct = getStartTime();
+    for (int i = 0; i < 10000; ++i) { 
+        dotProductLayer(inputs, weights2D, biases);
+    }
+    printElapsedTime(startDotProduct, "dotProductLayer");
+
+    // manualLayer is fast but can't generalize to any number of inputs
+    // forLoopLayer is general but slow
+    // dotProductLayer is both
 
     return 0;
 }
