@@ -15,22 +15,22 @@ void test_eigen_vector() {
     m(0,0) = 1;
     m(1,0) = 2;
     m(2,0) = 3;
-    std::cout << m << std::endl;
+    std::cout << m << '\n';
 
     Matrix<double, 3, 1> M(1, 2, 3);
-    std::cout << M << std::endl;
+    std::cout << M << '\n';
 
     Matrix<double, 3, 1> mm = {1, 2, 3};
-    std::cout << mm << std::endl;
+    std::cout << mm << '\n';
 
     VectorXd v(3);
     v(0) = 1;
     v(1) = 2;
     v(2) = 3;
-    std::cout << v << std::endl;
+    std::cout << v << '\n';
 
     Vector<double, 3> V(1, 2, 3);
-    std::cout << V << std::endl;
+    std::cout << V << '\n';
 }
 
 void test_eigen_matrix() {
@@ -42,15 +42,15 @@ void test_eigen_matrix() {
     m(1,0) = 4;
     m(1,1) = 5;
     m(1,2) = 6;
-    std::cout << m << std::endl;
+    std::cout << m << '\n';
 
     MatrixXd M {{1, 2, 3},
                 {4, 5, 6}};
-    std::cout << M << std::endl;
+    std::cout << M << '\n';
 
     Matrix<double, 2, 3> mm {{1, 2, 3},
                              {4, 5, 6}};
-    std::cout << mm << std::endl;
+    std::cout << mm << '\n';
 }
 
 void manual_neuron() {
@@ -65,11 +65,11 @@ void manual_neuron() {
                     inputs(2) * weights(2) + 
                     inputs(3) * weights(3) + 
                     bias;
-    std::cout << output << std::endl;
+    std::cout << output << '\n';
 
     auto finish = high_resolution_clock::now();
     auto us_int = duration_cast<microseconds>(finish - start);
-    std::cout << us_int.count() << "us" << std::endl;
+    std::cout << us_int.count() << "us" << '\n';
 }
 
 void manual_layer() {
@@ -99,11 +99,11 @@ void manual_layer() {
                  inputs(2) * weights3(2) + 
                  inputs(3) * weights3(3) + 
                  bias3;
-    std::cout << outputs << std::endl;
+    std::cout << outputs << '\n';
 
     auto finish = high_resolution_clock::now();
     auto us_int = duration_cast<microseconds>(finish - start);
-    std::cout << us_int.count() << "us" << std::endl;
+    std::cout << us_int.count() << "us" << '\n';
 }
 
 void for_loop_layer(){
@@ -123,11 +123,11 @@ void for_loop_layer(){
         }
         outputs(i) += biases(i);
     }
-    std::cout << outputs << std::endl;
+    std::cout << outputs << '\n';
 
     auto finish = high_resolution_clock::now();
     auto us_int = duration_cast<microseconds>(finish - start);
-    std::cout << us_int.count() << "us" << std::endl;
+    std::cout << us_int.count() << "us" << '\n';
 }
 
 void dot_product_neuron(){
@@ -138,11 +138,11 @@ void dot_product_neuron(){
     Vector<double, 4> weights(0.2, 0.8, -0.5, 1.0);
     double bias = 2.0;
     double output = inputs.dot(weights) + bias;
-    std::cout << output << std::endl;
+    std::cout << output << '\n';
 
     auto finish = high_resolution_clock::now();
     auto us_int = duration_cast<microseconds>(finish - start);
-    std::cout << us_int.count() << "us" << std::endl;
+    std::cout << us_int.count() << "us" << '\n';
 }
 
 void dot_product_layer() {
@@ -156,11 +156,11 @@ void dot_product_layer() {
     Vector<double, 3> biases(2, 3, 0.5);
 
     Vector<double, 3> outputs = weights * inputs + biases;
-    std::cout << outputs << std::endl;
+    std::cout << outputs << '\n';
 
     auto finish = high_resolution_clock::now();
     auto us_int = duration_cast<microseconds>(finish - start);
-    std::cout << us_int.count() << "us" << std::endl;
+    std::cout << us_int.count() << "us" << '\n';
 }
 
 void matrix_multiplication_layer() {
@@ -175,16 +175,24 @@ void matrix_multiplication_layer() {
                                   {-0.26, -0.27, 0.17, 0.87}};
     Vector<double, 3> biases(2, 3, 0.5);
 
-    Matrix<double, 3, 3> outputs = inputs * weights.transpose() + biases;
-    std::cout << outputs << std::endl; 
+    Matrix<double, 3, 3> outputs{inputs * weights.transpose()};
+    outputs = outputs.rowwise() + biases.transpose();
+    std::cout << outputs << '\n'; 
 
     auto finish = high_resolution_clock::now();
     auto us_int = duration_cast<microseconds>(finish - start);
-    std::cout << us_int.count() << "us" << std::endl;             
+    std::cout << us_int.count() << "us" << '\n';             
 }
  
 int main()
-{
+{   /*
+    todo
+    - fix bug
+    - add gtest
+    - make functions take input
+    - pass and return appropriately via reference, test timing
+    - templatify functions
+    */
     test_eigen_vector();
     test_eigen_matrix();
     // these functions could've been done equivalently with std::vector
