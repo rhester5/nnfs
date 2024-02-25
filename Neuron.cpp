@@ -61,7 +61,7 @@ auto getStartTime() {
 void printElapsedTime(auto& start, std::string_view functionName) {
     auto finish = high_resolution_clock::now();
     auto elapsedTime = duration_cast<microseconds>(finish - start);
-    std::cout << "call to " << functionName << " took " << elapsedTime.count() << ((elapsedTime.count() == 1) ? " microsecond" : " microseconds") << '\n';
+    std::cout << functionName << " took " << elapsedTime.count() << ((elapsedTime.count() == 1) ? " microsecond" : " microseconds") << '\n';
 }
 
 double manualNeuron(const Vector<double, 4>& inputs, const Vector<double, 4>& weights, double bias) {
@@ -125,6 +125,12 @@ Matrix<double, 3, 3> matrixMultiplicationLayer(const Matrix<double, 3, 4>& input
     Matrix<double, 3, 3> outputs{inputs * weights.transpose()};
     return outputs.rowwise() + biases.transpose();    
 }
+
+Matrix<double, 3, 3> matrixMultiplicationLayerByValue(Matrix<double, 3, 4> inputs, Matrix<double, 3, 4> weights, Vector<double, 3> biases) {
+    // compute output of layer with batch of data with samples with 4 inputs and layer with 3 neurons using matrix multiplication
+    Matrix<double, 3, 3> outputs{inputs * weights.transpose()};
+    return outputs.rowwise() + biases.transpose();    
+}
  
 int main()
 {   /*
@@ -183,6 +189,22 @@ int main()
                                 {-1.5, 2.7, 3.3, -0.8}};
     Matrix<double, 3, 3> matrixMultiplicationLayerOutput{matrixMultiplicationLayer(batch, weights2D, biases)};
     std::cout << matrixMultiplicationLayerOutput << '\n';
+
+    // test difference in runtime between pass by reference and pass by value
+
+    auto startByRef = getStartTime();
+    for (int i = 0; i < 10000; ++i) { 
+        matrixMultiplicationLayer(batch, weights2D, biases);
+    }
+    printElapsedTime(startByRef, "Pass by reference");
+
+    auto startByVal = getStartTime();
+    for (int i = 0; i < 10000; ++i) { 
+        matrixMultiplicationLayerByValue(batch, weights2D, biases);
+    }
+    printElapsedTime(startByVal, "Pass by value");
+
+    // pass by value faster - guess Matrix and Vector objects aren't too expensive to copy when they're this small
 
     return 0;
 }
