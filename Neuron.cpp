@@ -1,5 +1,6 @@
-#include <iostream>
 #include <chrono>
+#include <iostream>
+#include <string_view>
 #include <Eigen/Dense>
 
 using namespace Eigen;
@@ -53,9 +54,19 @@ void test_eigen_matrix() {
     std::cout << mm << '\n';
 }
 
+auto getStartTime() {
+    return high_resolution_clock::now();
+}
+
+void printElapsedTime(auto& start, std::string_view functionName) {
+    auto finish = high_resolution_clock::now();
+    auto elapsedTime = duration_cast<microseconds>(finish - start);
+    std::cout << "call to " << functionName << " took " << elapsedTime.count() << " microseconds" << '\n';
+}
+
 void manual_neuron() {
     // manually compute output of neuron with 4 inputs
-    auto start = high_resolution_clock::now();
+    auto start = getStartTime();
 
     Vector<double, 4> inputs(1.0, 2.0, 3.0, 2.5);
     Vector<double, 4> weights(0.2, 0.8, -0.5, 1.0);
@@ -67,14 +78,12 @@ void manual_neuron() {
                     bias;
     std::cout << output << '\n';
 
-    auto finish = high_resolution_clock::now();
-    auto us_int = duration_cast<microseconds>(finish - start);
-    std::cout << us_int.count() << "us" << '\n';
+    printElapsedTime(start, "manualNeuron");
 }
 
 void manual_layer() {
     // manually compute output of layer with 4 inputs and 3 neurons
-    auto start = high_resolution_clock::now();
+    auto start = getStartTime();
 
     Vector<double, 4> inputs(1.0, 2.0, 3.0, 2.5);
     Vector<double, 4> weights1(0.2, 0.8, -0.5, 1.0);
@@ -101,14 +110,12 @@ void manual_layer() {
                  bias3;
     std::cout << outputs << '\n';
 
-    auto finish = high_resolution_clock::now();
-    auto us_int = duration_cast<microseconds>(finish - start);
-    std::cout << us_int.count() << "us" << '\n';
+    printElapsedTime(start, "manualLayer");
 }
 
 void for_loop_layer(){
     // compute output of layer with 4 inputs and 3 neurons using a for loop
-    auto start = high_resolution_clock::now();
+    auto start = getStartTime();
 
     Vector<double, 4> inputs(1.0, 2.0, 3.0, 2.5);
     Matrix<double, 3, 4> weights {{0.2, 0.8, -0.5, 1.0},
@@ -125,14 +132,12 @@ void for_loop_layer(){
     }
     std::cout << outputs << '\n';
 
-    auto finish = high_resolution_clock::now();
-    auto us_int = duration_cast<microseconds>(finish - start);
-    std::cout << us_int.count() << "us" << '\n';
+    printElapsedTime(start, "forLoopLayer");
 }
 
 void dot_product_neuron(){
     // compute output of neuron with 4 inputs using dot product
-    auto start = high_resolution_clock::now();
+    auto start = getStartTime();
 
     Vector<double, 4> inputs(1.0, 2.0, 3.0, 2.5);
     Vector<double, 4> weights(0.2, 0.8, -0.5, 1.0);
@@ -140,14 +145,12 @@ void dot_product_neuron(){
     double output = inputs.dot(weights) + bias;
     std::cout << output << '\n';
 
-    auto finish = high_resolution_clock::now();
-    auto us_int = duration_cast<microseconds>(finish - start);
-    std::cout << us_int.count() << "us" << '\n';
+    printElapsedTime(start, "dotProductNeuron");
 }
 
 void dot_product_layer() {
     // compute output of layer with 4 inputs and 3 neurons using matrix multiplication/dot product
-    auto start = high_resolution_clock::now();
+    auto start = getStartTime();
 
     Vector<double, 4> inputs(1.0, 2.0, 3.0, 2.5);
     Matrix<double, 3, 4> weights {{0.2, 0.8, -0.5, 1.0},
@@ -158,14 +161,12 @@ void dot_product_layer() {
     Vector<double, 3> outputs = weights * inputs + biases;
     std::cout << outputs << '\n';
 
-    auto finish = high_resolution_clock::now();
-    auto us_int = duration_cast<microseconds>(finish - start);
-    std::cout << us_int.count() << "us" << '\n';
+    printElapsedTime(start, "dotProductLayer");
 }
 
 void matrix_multiplication_layer() {
     // compute output of layer with batch of data with samples with 4 inputs and layer with 3 neurons using matrix multiplication
-    auto start = high_resolution_clock::now();
+    auto start = getStartTime();
     
     Matrix<double, 3, 4> inputs {{1.0, 2.0, 3.0, 2.5},
                                  {2.0, 5.0, -1.0, 2.0},
@@ -179,19 +180,18 @@ void matrix_multiplication_layer() {
     outputs = outputs.rowwise() + biases.transpose();
     std::cout << outputs << '\n'; 
 
-    auto finish = high_resolution_clock::now();
-    auto us_int = duration_cast<microseconds>(finish - start);
-    std::cout << us_int.count() << "us" << '\n';             
+    printElapsedTime(start, "matrixMultiplicationLayer");           
 }
  
 int main()
 {   /*
     todo
-    - fix bug
-    - add gtest
     - make functions take input
+    - write header
+    - add gtest
     - pass and return appropriately via reference, test timing
     - templatify functions
+    - more tests
     */
     test_eigen_vector();
     test_eigen_matrix();
