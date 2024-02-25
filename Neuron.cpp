@@ -145,8 +145,8 @@ void dot_product_neuron(){
     std::cout << us_int.count() << "us" << std::endl;
 }
 
-void matrix_multiplication_layer() {
-    // compute output of layer with 4 inputs and 3 neurons using matrix multiplication
+void dot_product_layer() {
+    // compute output of layer with 4 inputs and 3 neurons using matrix multiplication/dot product
     auto start = high_resolution_clock::now();
 
     Vector<double, 4> inputs(1.0, 2.0, 3.0, 2.5);
@@ -162,6 +162,26 @@ void matrix_multiplication_layer() {
     auto us_int = duration_cast<microseconds>(finish - start);
     std::cout << us_int.count() << "us" << std::endl;
 }
+
+void matrix_multiplication_layer() {
+    // compute output of layer with batch of data with samples with 4 inputs and layer with 3 neurons using matrix multiplication
+    auto start = high_resolution_clock::now();
+    
+    Matrix<double, 3, 4> inputs {{1.0, 2.0, 3.0, 2.5},
+                                 {2.0, 5.0, -1.0, 2.0},
+                                 {-1.5, 2.7, 3.3, -0.8}};
+    Matrix<double, 3, 4> weights {{0.2, 0.8, -0.5, 1.0},
+                                  {0.5, -0.91, 0.26, -0.5},
+                                  {-0.26, -0.27, 0.17, 0.87}};
+    Vector<double, 3> biases(2, 3, 0.5);
+
+    Matrix<double, 3, 3> outputs = inputs * weights.transpose() + biases;
+    std::cout << outputs << std::endl; 
+
+    auto finish = high_resolution_clock::now();
+    auto us_int = duration_cast<microseconds>(finish - start);
+    std::cout << us_int.count() << "us" << std::endl;             
+}
  
 int main()
 {
@@ -173,6 +193,7 @@ int main()
     for_loop_layer();
     // these functions actually required Eigen
     dot_product_neuron();
+    dot_product_layer();
     matrix_multiplication_layer();
 
     return 0;
