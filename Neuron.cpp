@@ -3,6 +3,8 @@
 #include <string_view>
 #include <Eigen/Dense>
 
+#include "Neuron.h"
+
 using namespace Eigen;
 
 using std::chrono::high_resolution_clock;
@@ -135,12 +137,12 @@ Matrix<double, 3, 3> matrixMultiplicationLayerByValue(Matrix<double, 3, 4> input
 int main()
 {   /*
     todo
-    - formatting (configure .editorconfig, add to gitignore)
-    - write header
     - add gtest
     ---
     - templatify dotProductLayer and matrixMultiplicationLayer since those may actually be reused
     - more tests with different matrix and vector sizes
+    ---
+    - formatting (configure .editorconfig, add to gitignore)
     */
 
     testEigenVector();
