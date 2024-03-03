@@ -13,8 +13,8 @@ double dotProductNeuron(const Eigen::Vector<double, 4>& inputs, const Eigen::Vec
 
 Eigen::Vector<double, 3> dotProductLayer(const Eigen::Vector<double, 4>& inputs, const Eigen::Matrix<double, 3, 4>& weights, const Eigen::Vector<double, 3>& biases);
 
-Eigen::Matrix<double, 3, 3> MatrixMultiplicationLayer(const Eigen::Matrix<double, 3, 4>& inputs, const Eigen::Matrix<double, 3, 4>& weights, const Eigen::Vector<double, 3>& biases);
+Eigen::Matrix<double, 3, 3> matrixMultiplicationLayer(const Eigen::Matrix<double, 3, 4>& inputs, const Eigen::Matrix<double, 3, 4>& weights, const Eigen::Vector<double, 3>& biases);
 
-Eigen::Matrix<double, 3, 3> MatrixMultiplicationLayerByValue(Eigen::Matrix<double, 3, 4> inputs, Eigen::Matrix<double, 3, 4> weights, Eigen::Vector<double, 3> biases);
+Eigen::Matrix<double, 3, 3> matrixMultiplicationLayerByValue(Eigen::Matrix<double, 3, 4> inputs, Eigen::Matrix<double, 3, 4> weights, Eigen::Vector<double, 3> biases);
 
 #endif
