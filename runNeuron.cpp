@@ -69,7 +69,6 @@ void printElapsedTime(auto& start, std::string_view functionName) {
 int main()
 {   /*
     todo
-    - templatify dotProductLayer and matrixMultiplicationLayer since those may actually be reused
     - more tests with different matrix and vector sizes
     ---
     - formatting (configure .editorconfig, add to gitignore)
