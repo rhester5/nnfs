@@ -159,5 +159,13 @@ int main()
     // forLoopLayer is general but slow
     // dotProductLayer is both
 
+    // 2 layers
+    Matrix<double, 3, 3> weights2D2 {{0.1, -0.14, 0.5},
+                                  {-0.5, 0.12, -0.33},
+                                  {-0.44, 0.73, -0.13}};
+    Vector<double, 3> biases2{-1, 2, -0.5};
+    Matrix<double, 3, 3> matrixMultiplicationLayer2Output{matrixMultiplicationLayer(matrixMultiplicationLayerOutput, weights2D2, biases2)};
+    std::cout << matrixMultiplicationLayer2Output << '\n';
+
     return 0;
 }
