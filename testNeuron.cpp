@@ -12,6 +12,8 @@ protected:
     Eigen::Vector<double, 3> m_outputs{4.8, 1.21, 2.385}; 
 };
 
+// TODO add more tests with different size inputs and matrixMultiplicationLayer
+
 TEST_F(NeuronTest, TestDotProductLayer) {
     ASSERT_TRUE(dotProductLayer(m_inputs, m_weights, m_biases).isApprox(m_outputs));
 }
