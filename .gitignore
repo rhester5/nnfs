@@ -1,4 +1,5 @@
 .vscode/
 googletest/
 build/
+runDense
 runNeuron
