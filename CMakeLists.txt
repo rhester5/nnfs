@@ -14,6 +14,7 @@ include_directories(googletest/include) # this is so we can #include <gtest/gtes
 
 add_executable(testNeuron testNeuron.cpp Neuron.cpp) # add this executable
 add_executable(runNeuron runNeuron.cpp Neuron.cpp)
+add_executable(runDense runDense.cpp)
 
 target_link_libraries(testNeuron PRIVATE gtest) # link google test to this executable
 
