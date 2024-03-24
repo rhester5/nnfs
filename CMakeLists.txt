@@ -13,13 +13,15 @@ add_subdirectory(googletest) # add googletest subdirectory
 include_directories(googletest/include) # this is so we can #include <gtest/gtest.h>
 
 add_executable(testNeuron testNeuron.cpp Neuron.cpp) # add this executable
+add_executable(testDense testDense.cpp)
 add_executable(runNeuron runNeuron.cpp Neuron.cpp)
 add_executable(runDense runDense.cpp)
 
 target_link_libraries(testNeuron PRIVATE gtest) # link google test to this executable
+target_link_libraries(testDense PRIVATE gtest)
 
 include(GoogleTest)
-gtest_discover_tests(testNeuron) # discovers tests by asking the compiled test executable to enumerate its tests
+gtest_discover_tests(testNeuron testDense) # discovers tests by asking the compiled test executable to enumerate its tests
 
 # from build directory:
 # cmake ..
