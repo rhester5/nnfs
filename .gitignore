@@ -2,5 +2,6 @@
 .venv/
 googletest/
 build/
+extern/
 runDense
 runNeuron

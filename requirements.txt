@@ -1,2 +1,4 @@
-pybind11
+matplotlib
 nnfs
+numpy
+pybind11

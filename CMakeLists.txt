@@ -23,6 +23,13 @@ target_link_libraries(testDense PRIVATE gtest)
 include(GoogleTest)
 gtest_discover_tests(testNeuron testDense) # discovers tests by asking the compiled test executable to enumerate its tests
 
+add_subdirectory(extern/pybind11)
+include_directories(extern/pybind11/include)
+pybind11_add_module(dense Dense.cpp)
+
+find_package(PythonLibs REQUIRED)
+include_directories(${PYTHON_INCLUDE_DIRS})
+
 # from build directory:
 # cmake ..
 # make
