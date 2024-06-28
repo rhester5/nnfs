@@ -3,5 +3,5 @@
 googletest/
 build/
 extern/
-runDense
-runNeuron
+__pycache__
+nnfs_code.py
