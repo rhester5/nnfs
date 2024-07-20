@@ -4,18 +4,16 @@
 
 template <int M, int N>
 class Dense {
-private:
-    Eigen::Matrix<double, M, N> m_weights;
-    Eigen::Vector<double, N> m_biases;
 public:
     Dense(const Eigen::Matrix<double, M, N>& weights, const Eigen::Vector<double, N>& biases) 
         : m_weights{weights}
         , m_biases{biases}
         {}
-    // TODO constructor (random initialize)
-    // TODO maybe allocate weights and biases on the heap since they could be very large
-    // -> would need to allocate in this file for random initialization
-    // -> would need to have constructors, setters, and forward that take pointers as input
+    
+    Dense()
+        : m_weights{0.01 * Eigen::Matrix<double, M, N>::Random()}
+        , m_biases{Eigen::Vector<double, N>::Zero()}
+        {}
 
     void setWeights(const Eigen::Matrix<double, M, N>& weights) {m_weights = weights;}
     void setBiases(const Eigen::Vector<double, N>& biases) {m_biases = biases;}
@@ -27,4 +25,7 @@ public:
         Eigen::Matrix<double, B, N> outputs{inputs * m_weights};
         return outputs.rowwise() + m_biases.transpose();
     }
+private:
+    Eigen::Matrix<double, M, N> m_weights{};
+    Eigen::Vector<double, N> m_biases{};
 };

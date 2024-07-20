@@ -21,6 +21,12 @@ expected_outputs = np.array([4.8, 1.21, 2.385])
 
 print(outputs, expected_outputs)
 
+random_dense_1 = Dense()
+print(random_dense_1.forward(inputs))
+
+random_dense_2 = Dense()
+print(random_dense_2.forward(inputs))
+
 '''
 # Create dataset
 X, y = spiral_data(samples=100, classes=3)

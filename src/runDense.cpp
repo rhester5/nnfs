@@ -9,10 +9,9 @@ int main() {
                                        {2.0, 5.0, -1.0, 2.0},
                                        {-1.5, 2.7, 3.3, -0.8}};
 
-    // TODO random
-    // Dense randomLayer{4, 3};
-    // Eigen::Matrix<double, 3, 3> randomOutputs{randomLayer.forward(batch)};
-    // std::cout << randomOutputs << '\n';
+    Dense<4, 3> randomLayer{};
+    Eigen::Matrix<double, 3, 3> randomOutputs{randomLayer.forward(batch)};
+    std::cout << randomOutputs << '\n';
 
     Eigen::Matrix<double, 4, 3> weights {{0.2, 0.5, -0.26},
                                            {0.8, -0.91, -0.27},
