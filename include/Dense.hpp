@@ -2,6 +2,7 @@
 
 #include <Eigen/Dense>
 
+// M is in-dim, N is out-dim
 template <int M, int N>
 class Dense {
 public:
@@ -15,7 +16,10 @@ public:
         , m_biases{Eigen::Vector<double, N>::Zero()}
         {}
 
+    Eigen::Matrix<double, M, N> getWeights() {return m_weights;}
     void setWeights(const Eigen::Matrix<double, M, N>& weights) {m_weights = weights;}
+
+    Eigen::Vector<double, N> getBiases() {return m_biases;}
     void setBiases(const Eigen::Vector<double, N>& biases) {m_biases = biases;}
 
     // B is batch size
