@@ -22,8 +22,3 @@ TEST_F(DenseTest, TestDenseForward) {
     Dense testLayer(m_weights, m_biases);
     ASSERT_TRUE(testLayer.forward(m_inputs).isApprox(m_outputs));
 }
-
-int main(int argc, char **argv) {
-  testing::InitGoogleTest(&argc, argv);
-  return RUN_ALL_TESTS();
-}

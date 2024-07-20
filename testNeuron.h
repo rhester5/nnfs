@@ -17,8 +17,3 @@ protected:
 TEST_F(NeuronTest, TestDotProductLayer) {
     ASSERT_TRUE(dotProductLayer(m_inputs, m_weights, m_biases).isApprox(m_outputs));
 }
-
-int main(int argc, char **argv) {
-  testing::InitGoogleTest(&argc, argv);
-  return RUN_ALL_TESTS();
-}
