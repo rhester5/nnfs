@@ -1,4 +1,6 @@
-#include "Dense.h"
+#pragma once
+
+#include "Dense.hpp"
 
 #include <gtest/gtest.h>
 

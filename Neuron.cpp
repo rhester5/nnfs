@@ -1,4 +1,4 @@
-#include "Neuron.h"
+#include "Neuron.hpp"
 
 #include <Eigen/Dense>
 

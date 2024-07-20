@@ -1,5 +1,5 @@
-#include "testDense.h"
-#include "testNeuron.h"
+#include "testDense.hpp"
+#include "testNeuron.hpp"
 
 #include <gtest/gtest.h>
 

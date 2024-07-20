@@ -1,5 +1,4 @@
-#ifndef NEURON_H
-#define NEURON_H
+#pragma once
 
 #include <Eigen/Dense>
 
@@ -48,6 +47,3 @@ Eigen::Matrix<double, S, M> matrixMultiplicationLayerByValue(Eigen::Matrix<doubl
     Eigen::Matrix<double, S, M> outputs{inputs * weights.transpose()};
     return outputs.rowwise() + biases.transpose();    
 }
-
-
-#endif

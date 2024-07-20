@@ -1,4 +1,4 @@
-#include "Dense.h"
+#include "Dense.hpp"
 
 #include <iostream>
 #include <Eigen/Dense>

@@ -1,5 +1,4 @@
-#ifndef DENSE_H
-#define DENSE_H
+#pragma once
 
 #include <Eigen/Dense>
 
@@ -29,5 +28,3 @@ public:
         return outputs.rowwise() + m_biases.transpose();
     }
 };
-
-#endif

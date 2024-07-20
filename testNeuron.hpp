@@ -1,4 +1,6 @@
-#include "Neuron.h"
+#pragma once
+
+#include "Neuron.hpp"
 
 #include <gtest/gtest.h>
 
