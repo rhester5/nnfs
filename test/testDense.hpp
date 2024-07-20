@@ -24,3 +24,12 @@ TEST_F(DenseTest, TestDenseForward) {
     Dense testLayer(m_weights, m_biases);
     ASSERT_TRUE(testLayer.forward(m_inputs).isApprox(m_outputs));
 }
+
+TEST_F(DenseTest, TestDenseRandom) {
+    Dense<4, 3> testLayer{};
+    auto weights = testLayer.getWeights();
+    auto biases = testLayer.getBiases();
+    ASSERT_EQ(weights.rows(), 4);
+    ASSERT_EQ(weights.cols(), 3);
+    ASSERT_EQ(biases.rows(), 3);
+}
