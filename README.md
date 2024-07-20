@@ -45,8 +45,8 @@ from project root:
 
 ## Running Python
 
-Depending on your OS, you may first have to build the C++ code and copy/paste the python bindings files to the project root.
+Depending on your OS, you may first have to build the C++ code and copy/paste the python bindings files to the python folder.
 
-from project root:
+from python folder:
 
     python plot.py

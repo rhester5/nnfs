@@ -10,14 +10,15 @@ enable_testing() # to discover tests in test explorer
 
 add_subdirectory(googletest) # add googletest subdirectory
 
+include_directories(include)
 include_directories(googletest/include) # this is so we can #include <gtest/gtest.h>
 
 # add run executables
-add_executable(runNeuron runNeuron.cpp Neuron.cpp)
-add_executable(runDense runDense.cpp)
+add_executable(runNeuron src/runNeuron.cpp src/Neuron.cpp)
+add_executable(runDense src/runDense.cpp)
 
 # add test executables
-add_executable(testAll testAll.cpp)
+add_executable(testAll test/testAll.cpp)
 
 target_link_libraries(testAll PRIVATE gtest) # link google test to this executable
 
@@ -26,7 +27,7 @@ gtest_discover_tests(testAll) # discovers tests by asking the compiled test exec
 
 add_subdirectory(extern/pybind11)
 include_directories(extern/pybind11/include)
-pybind11_add_module(dense Dense.cpp)
+pybind11_add_module(dense src/Dense.cpp)
 
 find_package(PythonLibs REQUIRED)
 include_directories(${PYTHON_INCLUDE_DIRS})
